@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .filter span {
+      display: inline-block;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+    .filter span.on {
+      background: green;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    
+    <h1 v-text='count'></h1>
+    <button @click='count++'>自增</button>
+    <hr>
+    <div v-for='n in list' v-text='n'></div>
+    <hr>
+    <h1 v-text='userinfo'></h1>
+    <hr>
+
+    <div class='filter'>
+      <span
+        v-for='item in tabArr'
+        v-text='item.label'
+        :class='{"on":tab==item.tab}'
+        @click='tab=item.tab'
+      >
+      </span>
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        count: 100,
+        list: [1,2,3,4],
+        info: {
+          user: {
+            name: '张三',
+            age: 10
+          }
+        },
+        tabArr: [
+          { id: 1, tab:'', label: '全部' },
+          { id: 5, tab:'good', label: '精华' },
+          { id: 4, tab:'share', label: '分享' },
+          { id: 2, tab:'ask', label: '问答' },
+          { id: 3, tab:'job', label: '招聘' },
+        ],
+        tab: ''
+      },
+      computed: {
+        userinfo () {
+          const { user } = this.info
+          return `姓名：${user.name}，年龄：${user.age}`
+        }
+      },
+      // 侦听器也是一个对象结构的选项
+      watch: {
+        // 监听count的变化，当count变化时，执行这个方法
+        count (newVal, oldVal) {
+          console.log('---count changed', newVal, oldVal)
+        },
+        list: 'listChangeHandle',
+        // 如果工作中监听对象变化无效，建议用下面这种语法。
+        info: {
+          deep: true,
+          handler () {
+            console.log('---info changed', this.info)
+          }
+        },
+        // 指定监听对象中某个属性的变化
+        'info.user.age' () {
+          console.log('---info age changeed')
+        },
+        'info.user.name': () => {
+          console.log('---info name changeed')
+        },
+        userinfo () {
+          console.log('---userinfo changed')
+        },
+        tab () {
+          console.log('---tab changed', '我要调接口')
+        }
+      },
+      methods: {
+        listChangeHandle () {
+          console.log('---list changed', this.list)
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>

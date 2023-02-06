@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <input type="text" v-model='task' @keyup.enter='submit' />
+    <hr>
+
+    年龄：<input type="text" v-model.number='age' /><br>
+    地址：<input type="text" v-model.trim='addr' /><br>
+    简介：<textarea cols="30" rows="3" v-model.lazy.trim='desc' @input='handle'></textarea>
+    <br>
+    <button @click='confirm'>提交</button>
+    <hr>
+
+    幸运色：
+    <!-- <input type="color" v-model='lucy' /><br> -->
+    <input type="color" :value='lucy' @input='lucy=$event.target.value' /><br>
+
+    性别：
+    <!-- 在HTML5中，给单选按钮组添加相同的name，可以互斥 -->
+    <!-- 在vue中，无须使用name，使用v-model绑定相同的变量即可互斥 -->
+    <!-- value，是用于单选按钮组v-model取值用的 -->
+
+    <!-- <input type="radio" value='0' v-model='gender' />男
+    <input type="radio" value='1' v-model='gender' />女 -->
+    <input
+      type="radio"
+      value='0'
+      :checked='(gender==0)'
+      @change='gender=$event.target.value'
+    />男
+    <input
+      type="radio"
+      value='1'
+      :checked='(gender==1)'
+      @change='gender=$event.target.value'
+    />女
+    <br>
+
+    爱好：
+    <!-- 在vue中，无须使用name属性对多选框进行分组 -->
+    <!-- 使用v-model绑定同一个变量(必须是数组类型)即可分组 -->
+    <!-- value，是用于checkbox的v-model来取值用的 -->
+
+    <!-- <span v-for='item in favArr'>
+      <input
+        type="checkbox"
+        :value='item.value'
+        v-model='fav'
+      />
+      <span v-text='item.label'></span>
+    </span> -->
+
+    <span v-for='item in favArr'>
+      <input
+        type="checkbox"
+        :value='item.value'
+        :checked='fav.includes(item.value)'
+        @change='fav = $event.target.checked ? [...fav, $event.target.value] : fav.filter(ele=>ele!==$event.target.value)'
+      />
+      <span v-text='item.label'></span>
+    </span>
+    <br>
+
+    学历：
+    <!-- 单选下拉框，v-model绑定文本类型的变量 -->
+    <!-- 多选下拉框，v-model绑定数组类型的变量，multiple -->
+    <!-- v-for作用在谁身上，循环的就是谁 -->
+
+    <!-- <select v-model='level'>
+      <option
+        v-for='item in levelArr'
+        :value='item.value'
+        v-text='item.label'>
+      </option>
+    </select> -->
+
+    <select :value='level' @change='level=$event.target.value'>      
+      <option
+        v-for='item in levelArr'
+        :value='item.value'
+        v-text='item.label'>
+      </option>
+    </select>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        task: '',
+        age: 0,
+        addr: '',
+        desc: '',
+        lucy: '#000000',
+        gender: '',
+        favArr: [
+          { id: 1, label:'跑步', value:'running' },
+          { id: 2, label:'读书', value:'book' },
+          { id: 3, label:'篮球', value:'basketball' },
+          { id: 4, label:'游戏', value:'game' },
+          { id: 5, label:'编程', value:'coding' }
+        ],
+        fav: [],
+        levelArr: [
+          { id: 1, label: '高中', value: 'gaozhong' },
+          { id: 2, label: '大专', value: 'dazhuang' },
+          { id: 3, label: '本科', value: 'benke' },
+          { id: 4, label: '硕士', value: 'shuoshi' }
+        ],
+        level: 'gaozhong'
+      },
+      methods: {
+        submit () {
+          console.log('提交', this.task)
+        },
+        confirm () {
+          console.log('age', typeof this.age)
+          console.log('addr', this.addr.length)
+        },
+        handle () {
+          console.log('desc', this.desc)
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>

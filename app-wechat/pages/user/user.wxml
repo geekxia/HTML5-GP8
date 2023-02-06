@@ -1,0 +1,2 @@
+<canvas id="canvas" type="2d" class="canvas"  />
+<button bindtap="save">保存到相册</button>

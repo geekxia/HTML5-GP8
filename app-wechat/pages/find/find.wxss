@@ -1,0 +1,15 @@
+/* pages/find/find.wxss */
+
+#box {
+  width: 350rpx;
+  height: 350rpx;
+  border: 1rpx solid red;
+  margin: 0 auto;
+}
+
+#door {
+  height: 350rpx;
+  border: 1rpx solid red;
+  width: 100%;
+  margin: 0 auto;
+}

@@ -1,0 +1,5 @@
+<view wx:for="{{list}}" wx:key="*this" class="row">
+  <view data-id="{{item.id}}" bindtap="skipTo">{{item.title}}</view>
+</view>
+
+<button bindtap="scan">扫码</button>

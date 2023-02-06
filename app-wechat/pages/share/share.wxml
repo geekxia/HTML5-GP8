@@ -1,0 +1,6 @@
+<button open-type="contact">联系客户</button>
+<button open-type="feedback">投拆建议</button>
+<button open-type="chooseAvatar" bindchooseavatar='getAvatar'>
+  <image src='{{avatar}}' />
+</button>
+<button open-type="share">拼团</button>

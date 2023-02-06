@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    <!-- <h1 v-if='show'>我是一个可有可无的人</h1> -->
+    <h1 v-show='show'>我是一个可有可无的人</h1>
+    <button @click='show=!show'>显示/隐藏</button>
+    <hr>
+
+    <!-- <h1 v-show='row===0'>第一行文字</h1>
+    <h1 v-show='row===1'>第二行文字</h1>
+    <h1 v-show='row===2'>第三行文字</h1>
+    <h1 v-show='row===3'>第四行文字</h1> -->
+
+    <!-- <h1 v-if='row===0'>第一行文字</h1>
+    <h1 v-if='row===1'>第二行文字</h1>
+    <h1 v-if='row===2'>第三行文字</h1>
+    <h1 v-if='row===3'>第四行文字</h1> -->
+
+    <h1 v-if='row===0'>第一行文字</h1>
+    <h1 v-else-if='row===1'>第二行文字</h1>
+    <h1 v-else-if='row===2'>第三行文字</h1>
+    <h1 v-else>第四行文字</h1>
+    <button @click='row=(++row)%4'>切换行</button>
+    <hr>
+
+    <!-- 下述代码，是完全符合规范的 -->
+    <!-- 我们只是不推荐在同一个节点上同时使用v-if和v-for -->
+    <h1 v-for='n in 5'>
+      <span v-text='n' v-if='n%2'></span>
+    </h1>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        show: true,
+        row: 0
+      }
+    })
+  </script>
+
+</body>
+</html>

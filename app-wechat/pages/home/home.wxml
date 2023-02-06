@@ -1,0 +1,34 @@
+<scroll-view scroll-x class="scroll" scroll-into-view='{{toView}}' scroll-with-animation>
+  <view wx:for="{{navs}}" wx:key='*this' id="{{'n'+item.id}}">
+    <text class="{{navId==='n'+item.id?'on':''}}" data-id='{{item.id}}' bindtap="itemTap">{{item.label}}</text>
+  </view>
+</scroll-view>
+
+<picker mode="region" bindchange="regionChange" value="{{region}}">
+  <view class="picker">
+    当前选择：{{region[0]}}，{{region[1]}}，{{region[2]}}
+  </view>
+</picker>
+
+<map class="map" scale='{{16}}' markers="{{markers}}" longitude="{{116.307520}}" latitude="{{39.984060}}"></map>
+<button bindtap="goTo">去这里</button>
+<button bindtap="call">咨询</button>
+
+<!-- 当用户拒绝位置授权时，这个视图会显示。 -->
+<view hidden="{{isPos}}" class="setting">
+  <button open-type="openSetting">打开设置</button>
+  <!-- <button bindtap="openSettingPage">设置</button> -->
+</view>
+
+<!-- 当用户同意位置授权时，基于位置显示商家列表。 -->
+<view wx:for='{{list}}' wx:key='*this' class="row">
+  <text>店铺：{{item.name}}</text>
+  <text>距离：{{item.distance}}米</text>
+</view>
+
+
+<!-- <camera device-position="back" flash="off" binderror="error" style="width: 100%; height: 300px;"></camera>
+<button type="primary" bindtap='take'>拍照</button>
+
+<button bindtap="getInfo">登录</button>
+<button open-type="getPhoneNumber" bindgetphonenumber="getMobile">登录</button> -->

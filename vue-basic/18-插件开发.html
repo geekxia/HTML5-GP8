@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    [v-cloak] { display: none; }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <button @click='$message("你好")'>提示</button>
+    <h1 v-text='name'></h1>
+    <qf-button text='删除'></qf-button>
+    <qf-button text='点击'></qf-button>
+    <h1 v-cloak>{{ price | rmb }}</h1>
+    用户名：<input type="text" v-focus />
+    <br>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+  <script>
+
+    // 如何编写一个Vue插件？
+    // 所有的Vue第三方插件都必须有一个install方法
+    const Qf = {
+      install (Vue) {
+        // 原型链
+        Vue.prototype.$http = 'https://baidu.com'
+        Vue.prototype.$message = msg => alert(msg)
+        // 全局混入
+        Vue.mixin({
+          data() {
+            return { name:'千锋教育' }
+          },
+          methods: {
+            verify () { console.log('--') }
+          }
+        })
+        // 全局组件
+        Vue.component('qf-button', {
+          template: `<button v-text='text'></button>`,
+          props: {
+            text: { type: String, default: '确定' }
+          }
+        })
+        // 全局过滤器
+        Vue.filter('rmb', val=>(`￥${val}`))
+        // 全局指令
+        Vue.directive('focus', {
+          // 表示当前DOM已经插入到真实DOM树中了
+          inserted: (el,binding) => {
+            el.focus()
+          }
+        })
+      }
+    }
+
+
+    Vue.use(Qf) // 注册插件
+
+  </script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data () {
+        return { price: 30 }
+      },
+      mounted () {
+        console.log('--', this.$http)
+      }
+    })
+  </script>
+
+
+
+</body>
+</html>

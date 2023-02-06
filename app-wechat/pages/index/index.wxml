@@ -1,0 +1,8 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="box">{{msg}}</view>
+  <view class="box">{{name}}</view>
+
+  <button bindtap='skipToGood'>跳转商品页</button>
+
+</view>

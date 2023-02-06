@@ -1,0 +1,275 @@
+你为什么要学前端？
+好程序员应该好在哪里？
+你认为好的学习方法是怎么的？
+为什么我可以？
+我们要学什么？学习路径是怎样的？
+我们怎么学？
+有哪些学习建议？
+-------------------------------------------
+三个知识层次：
+- 记忆（常识、行业经验）
+- 理解（面试、对你开发是有帮助的）
+- 应用（实现、工作中动手能力）
+-------------------------------------------
+
+一、vue-element-admin
+
+1、如何启动项目？（tui-editor、core-js、yarn/cnpm）
+2、如何分析一个全新的项目？（分析方法、语法扫盲、查漏补缺）
+3、研究项目的权限设计方案（路由守卫、权限流程图）
+4、如何封装权限指令v-permission？
+5、如何安装mongodb/studio3T？如何启动node-fullapi项目？
+6、在vue-element-admin中关闭Mock，如何连通node api服务器？
+     前端本地开是怎么解决“浏览器同源策略阻塞 AJAX”的？
+7、联调登录接口、用户信息接口，axios拦截器数据流疏通，有哪些需要注意的？
+
+
+create-react-app
+umi
+
+
+ 
+
+
+
+-------------------------------------------
+
+
+一【vue2】
+
+1、文档友好、汇总一起。
+2、基础到位、做好中大型项目，回馈文档和API。
+3、尽使用常规技巧、提升代码可维护性。
+4、学什么水平：vue全家桶、vant、element、vue-element-admin
+
+
+@vue/cli 【v2】
+vite【v3】
+装饰器架构【v2】
+
+
+二【react17/18】
+
+1、把vue先放下、能忘就先忘掉。
+2、重视文档、重视版本、阅读文档、自已多尝试、多总结。
+3、重视架构、各种环境都搞定。
+	create-react-app    类组件/Hooks    JS/TS    mobx/redux/@reduxjs/toolkit   V5/V6    ant-design
+	webpack/vite
+	dva/umi/ant-design-pro
+4、就业前景、发展前景。。。
+
+
+文档：浏览、会用（CV）、理解（React）
+
+
+
+
+一、JS够用（）
+二、框架（Vue、React、APP）
+	Vue移动端（Vant）  从0到1
+	Vue管理端（Element）  Vue-Element-Admin  （独立0到1）
+	Vue3
+
+	React移动端
+	React管理端（从0到1、umi）
+
+
+
+主题色：ConfigProvider.config({theme: } )  antd.viaels.css
+Size: 
+
+
+
+==========================
+
+面试：高薪是面出来的，面试不等于工作。
+积累：自己搞一个 review 文件夹（我会检查的）。
+强调：面试题不是背出来的，是自己梳理出来的。
+类型：封装式题目（有答案的常识题）开放式题目（没有标准答案的理解性题目）手写类题目（算法题、函数封装、机试题）
+
+上午、下午：自己提前准备3个题目，提前发到QQ班群，到55分自觉上来说题。
+
+面试题：JS(ES5、ES6、DOM、BOM)、Vue(Vue3)、React(Webpack、Mobx、Redux)、App(小程序、uniapp、taro、RN、Flutter、Electron)
+
+JS：7+1
+闭包：如何形成的、场景与作用、缺点
+new：
+
+HTTP状态码：200、401、403、404、415、302、301、500
+
+redux：三个3、流程、原理（store.subscribe、useReducer、forceUpdate）
+@reudxjs/toolkit：configireStore、createAsyncThunk，{ initalState, reducers, effects }  
+redux-saga：umi
+
+mobx: 
+
+SEO：HTML优化、前后端分享项目、SSR、产品设计
+Next.js (SSG、SSR、CSR)
+
+上下文：场景（有什么用、自上而下数据通信、避免复杂props穿透）、语法（怎么用createContext，Provider.value、Consumer）、注意事项（全局使用、国际化、上下文vs.状态提升vs.状态管理）
+
+通信方案：上下文vs.状态提升vs.状态管理（mobx、redux）
+
+
+
+
+==========================
+
+学习目标：一定要会做微信小程序；以微信小程序为案例，还要学会企业微信开发、支付宝小程序。。。。
+
+一、微信小程序开发准备工作：有一个小程序管理后台（公司给的）、微信开发者工具、会使用微信生态文档。
+
+	【微信小程序管理后台】
+	把微信号给到负责人，把你加进项目组。（三种角色）
+	AppID，每一个小程序都有一个唯一的APPID，用于区分账号的，我们开发也是基于某个具体的APPID账号进行开发。
+
+	首页：工作台
+	管理（会操作）：版本管理、成员管理
+	功能（会开发）：免费功能、备案后的功能
+	开发（会配置）：开发管理、接口设置（小程序上线会在这里做很多必须的配置）
+	设置（会备案）：上线小程序，都要备案的。
+
+	【微信开发者工具】
+	创建小程序项目、导入已存在的小程序项目。
+	会使用模拟器、编辑器（*）、调试器。（云开发，了解一下）
+	预览调试、真机调试
+	小程序上线（上线流程）
+
+	【微信小程序文档】
+	开发：指南、框架、组件、API、服务端。
+	社区：查资料。
+
+
+二、微信小程序编程范式（代码风格）
+
+小程序是APP，不是H5网页。小程序运行在APP中，借助APP可以拥有原生功能（访问硬件系统）。
+从产品设计的角度来讲，小程序一般是“小而美”，页面少、功能单一、界面优美。
+
+小程序的四种文件：
+	wxml（使用内置组件设计视图）、
+	wxss（支持大多数的CSS语法、单位用rpx）、
+	js（三种组件App、Page、Component；声明式data，生命周期）
+	json（基于配置的，小程序中有很多功能是配置出来的）
+
+有哪些技术可以做微信小程序？（小程序原生写法、uniapp、Taro、wepy、mpvue....）
+	原生小程序：可以使用最新的小程序技术，开发成本高。
+	用框架做小程序：这得看框架的脸色，开发成本低。
+	两个线程：渲染层、逻辑层。
+	三种配置：全局配置、页面配置、sitemap配置。
+	场景值：描述的是小程序的打开方式。
+	App.js入口文件（根组件）：
+		常用的生命周期：onLaunch() 登录流程、请求用户授权地理位置。
+		globalData：放置全局数据，但没有响应式，在其它组件中使用getApp()访问或修改。
+	Page页面：
+		页面注册（内置路由）：必须在app.json中注册，否则无法访问。
+		声明式：在data中定义声明式变量，使用this.data访问声明式变量，使用this.setData({})修改声明式变量，在视图中使用内置指令进行访问。
+		生命周期：它的生命周期和App/Component都不一样。onLoad（一般用于接收路由search参数）onShow（页面进入前台）onReady（数据渲染完成时）onHide（页面进入后台）onUnload（页面卸载时） 什么业务放在onShow()中做？什么业务放在onReady()中做？
+	路由栈：编程式路由跳转（switchTab、navigateTo、navigateBack）；小程序页面栈最多只能放入10个路由信息；<navigator>声明式路由跳转；在小程序中只有query传参，没有动态路由传参。
+	JS语法：模块化使用CommonJS语法（module.exports / require）、支持ES6和ES5、没有DOM/BOM。
+	小程序模板指令：文本 {{ }}、循环 wx:for='{{list}}' / wx:for-item='item' /wx:key='*this'、条件渲染 wx:if / wx:elif / wx:else / hidden、表单绑定 model:value或手动取值、事件绑定 bind*/catch*。
+	小程序样式：rpx（相对单位）；在小程序中canvas比较特殊只能使用px做单位。
+	小程序事件缓存：bind* 支持冒泡；catch*阻止冒泡；事件对象永远都是事件处理器的第一个参数；怎么传递自定义事件参数呢？（ev.target.dataset.id）; 小程序中常用事件，touch事件、tap事件、动画事件、基于组件的事件（表单事件）。
+	小程序类DOM操作：wx.createSelectorQuery()
+	小程序响应式：配置响应式resizable/pageOrientation，支持css媒体查询、使用内置组件<match-media>实现响应式。
+	小程序动画：旧接口wx.createAnimation / 新接口this.animate() this.clearAnimate()。在uniapp或其它小程序框架中只能使用旧接口动画；只有在原生小程序中才能使用新接口动画。新接口动画默认保留最后一个动画帧，如果要清除使用this.clearAnimate()进行清除。
+	自定义组件：Component、如何封装组件（properties、生命周期、methods）、如何注册并使用组件（usingComponents）、父子组件通信（父传子使用properties，子传父使用this.triggerEvent）。小程序自定义组件还支持behaviors混入、observers监听器、<slot>插槽。
+	调接口：wx.request({url,method,data})；在本地开发时，只需在开发者工具中勾选“不校验HTTPS证书”；小程序上线，只需要把接口地址改成https的线上地址，还要在小程序后台进行配置。上传、下载，同理。
+	画布：旧接口wx.createCanvasContext('canvas')、新接口（HTML5 Canvas），推荐使用新接口。在小程序中做画布开发，要注意以下几个问题：尺寸单位问题，图片绘制问题。参考链接：https://zhuanlan.zhihu.com/p/532085632
+	小程序分包技术：默认情况下，小程序上线时代码包不能超过2M。如果真实开发中，代码确实大于2M了，怎么办？首先尽可能地把源码中能够进行加速的静态资源或者JS第三方包搬到CDN上去。其次可以采用分包技术（相当于Vue路由中的路由懒加载）。
+	地理位置授权：这是唯一的一个能够自动弹出的授权框。在onLaunch中使用wx.getSetting()判断用户是否授权过地理信息，如果没有授权过，就使用wx.authorize弹出位置授权请求框（app.json中配置permission）；如果用户拒绝了授权位置，我们在业务页面中需要设计交互逻辑，引导用户点击打开微信内置的授权页面（wx.openSetting或button.open-type）；当用户同意位置授权，使用wx.getLocation()获取用户当前经纬度，有了经纬度就可以调接口获取商家列表了，再集成腾讯地图SDK做各种地图计算，把计算结果放在声明式变量上，就可以渲染商家列表了。还可以使用wx.onLocationChange()监听用户位置变化。
+	获取用户信息：通过交互事件，调用wx.getUserProfile()获取用户信息，要想得到完整的用户信息，得把加密数据发送给后端进行解密。
+	获取手机号：个人小程序已经不能使用这个功能了，只有企业小程序才能获取手机。只能使用 <button open-type="getPhoneNumber" bindgetphonenumber="getMobile">拿到手机加密信息，再把加密信息发送给后端进行解决。
+	其它授权（相机、电话本等），使用相关组件或API调用，即可弹框授权。
+	button表单的开放能力：客服、打开设置、投诉建议、分享。。。
+	小程序行业限制：注意小程序中有很多功能都有行业限制。
+	消息模板：在小程序管理后台开通“订阅消息”，主要逻辑都在后端。
+	下拉刷新和触底加载怎么做？
+	自定义navigatorBar怎么做？
+	<cover-view><cover-image>，用在原生组件上面放置自定义视图结构。最新小程序中，没有必要了。
+	<scroll-view> 一般用于制作可滚动的菜单，类似今日头条首页的菜单导航。
+	<picker><picker-view><picker-view-column> 制作pikcer框，比如选择时间、日期、省市区。
+	<map> 一般只用于显示商家位置的，不要在这上面做复杂功能。如果要导航建议使用 wx.openLocation打开微信内置地图。
+	<web-view> 小程序中是支持混合开发的，但用得很少。小程序的混合开发，只支持网络页面。小程序向H5页面传递数据，只能通过url传参；H5向小程序传递数据，这么做：在H5页面中引入wxsdk，调用wx.miniProgram.postMessage向小程序发消息，在小程序的<web-view bindmessage>接收H5发来的消息。
+	常用API：系统信息、路由、小程序之间跳转、界面操作、网络、支付、本地存储、图片API、位置API、开放接口。
+	支付：开通微信支付（备案）、小程序管理后台（备案），在小程序中wx.request发送商品信息给后端，后端返回支付密文给前端，前端再调用wx.requestPayment()完成支付。
+
+
+
+原生APP开发：Android（Java）、IOS（Object-C）
+
+跨平台APP开发（一套代码打包成多种不同平台上的应用）：【uniapp、Taro】【RN、Flutter】【Electron、NW】
+
+混合APP开发（在APP中嵌套Web应用的一种开发方式）：【Android/IOS+Web】【uniapp+Web】 【小程序+Web】【RN/Flutter+Web】
+【Electron/NW+Web】
+Web开发：原生JS/jQuery开发、前后端不分离、Vue开发、React开发、服务端渲染、Node.js开发
+
+为什么要用混合开发？原生APP开发成本高、招聘难度大，为了降低开发成本而选择混合；因为网络媒体形式多元化（社交属性），做APP开发不得不混合。
+uniapp简介：诞生于2018年底，走上坡路，它是前端工程师做手机APP的首选，Flutter/RN是其次。
+uniapp开发场景：虽然uniapp可以做很多应用，比如IOS、各种小程序、webapp等，但实际工作中更用用于做【Android、微信小程序】。
+
+uniapp项目创建：
+	1、使用 @vue/cli 创建uniapp项目（不建议）
+	2、使用HbuilderX创建uniapp项目（推荐）创建项目、运行调试方便、打包上线方便。
+
+uniapp运行成微信小程序：
+	1、在HX“运行设置”中配置微信小程序开发者工具的安装路径。
+	2、在微信小程序开发者工具“设置-安全设置”打开服务端口。
+	3、在HX “运行-运行小程序模拟器”
+
+uniapp运行成真机APP：
+	1、下载手机对应的电脑驱动程序（比如华为手机可以下载“华为手机助理HiSuite”）并安装。
+	2、用USB线，把手机连接到PC电脑上。
+	3、在手机上打开“开发者选项”，以华为手机为例，“设置-关于手机-版本号”，在版本号连续点击7次，即可打开开发者选项。
+	4、在电脑上运行驱动程序（华为手机助理），手机上应该是有反应的，按照提示进行连接，必须连接成功。
+	5、在HX中“运行-运行到真机或模拟器-下载手动驱动插件-选择你的手机”即可，在你真机上安装uniapp，就可以调试了。
+
+uniapp编程范式：
+	1、uniapp = 微信小程序风格 + Vue2风格。现在建议使用Vue2语法，因为Vue3大约是从2021年下半年开始支持的。
+	2、uniapp中有很多功能像微信小程序一样，都是配置出来的。比如路由配置、页面配置、下拉刷新、位置授权等。
+	3、在编写uniapp应用时，一律采用Vue单文件组件（.vue组件），在uniapp中不用像原生小程序那样地区分App、Page、Component。所有组件，无论是根组件、页面组件、可复用的组件，都是.vue组件。
+	4、在uniapp中同时支持小程序生命周期，也支持Vue生命周期，但推荐使用小程序风格的生命周期。
+	5、使用sass，要安装sass的uni插件。在Dcloud上注册开发账号，在HX中登录。在Dcloud的插件市场中，搜索你的sass插件，点击“使用HbuilderX导入插件”即可安装。
+	6、使用uView组件库。使用Dcloud插件市场下载uView包。在uniapp应用种集成：https://www.uviewui.com/components/downloadSetting.html
+	7、在uniapp视图结构中，不建议使用HTML5标签，推荐使用uniapp内置的组件们（注意这套内置组件和小程序组件是不完全一样的。）
+	8、在uniapp中没有vue-router（没有路由守卫），路由是基于app.json中配置的，路由系统的玩法和小程序路由系统几乎一致。
+	9、在uniapp中有vuex（并且是默认集成的），直接用。在uniapp中使用vuex，和Vue应用中使用vuex一模一样。
+	10、在uniapp动态渲染、绑定事件、列表渲染、条件渲染、表单绑定等，和Vue应用中一模一样。
+	11、nvue （native vue）是uniapp提供的一套编写vue代码的框架语法。使用nvue语法和vue是有很多差异的。
+	12、在uniapp做页面，尽可能使用uView组件库（如果没必要尽量不要自己封装组件，会遇到各种兼容性问题）。uView组件 > uniapp组件 > HTML标签。
+	13、uniapp官方建议的“跨端注意事项”（上班后认真读一下）：https://uniapp.dcloud.net.cn/matter.html
+	14、uniapp目录结构要求严格的，参考官方说明。
+	15、uniapp跨平台（App、小程序、Web）的条件编译写法：JS条件编译、CSS条件编译、视图条件编译、JSON配置条件编译（*坑*）。
+	16、登录问题：如果是小程序都不用做登录页面，使用uni.login进行登录。如果是App，有两种做法（token鉴权登录、oAuth2登录），token鉴权登录是我们经常见到的那种表单登录、手机登录；oAuth2登录（第三方账号登录），在manifest.json2勾选oAuth模块实现、参考教程去实现。
+		参考连接：https://zhuanlan.zhihu.com/p/436468046
+		oAuth2原理：http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html
+	17、uniapp混合开发：支持混合已部署上线的H5(对App和小程序都有可以)，也支持本地hybrid/html混合(只对App有用)
+		参考文档: https://uniapp.dcloud.net.cn/component/web-view.html
+		一般哪些页面适合做混合：长页面、样式复杂、交互复杂、爬虫需求。
+		uniapp页面和H5页面通信：uniapp向H5传递数据，一般都是url传参；H5向uniapp传参，使用uni.postMessage()。
+	18、uniapp一般用于做微信小程序、或者做Android。
+	19、打包android app：第1步在Dcloud注册、创建应用，得到appid；第2步配置Icon、启动图等；第3步注意勾选App中应有的功能和权限。第4步“发行-云打包”（用java8生成签名证书、按流程进行打包）。
+	
+
+Taro（V3）是京东凹凸实验室开源的一个跨平台技术（做小程序、APP、H5）。它的V3版本大约是2020年六七月份发布的。
+Taro(V2)框架风格：微信小程序风格 + React类组件风格。
+Taro(V3)框架风格：微信小程序风格 + React类组件 / React Hooks / Vue2 / Vue3 / Nerv。
+市场上很多公司喜欢用 Taro(V3) 做微信小程序。优势：比原生小程序开发效率更高；Taro API都是基于Promise封装的；编程风格多元化；Taro相对uniapp更加规范（坑较少）。
+
+环境搭建：只能通过脚手架创建项目。（参考官方文档）
+1、mobx版本（v4）（最新的Mobx是v6版本）
+2、react版本（v17）（可以使用Hooks写法）。
+3、项目运行 npm run dev:weapp，然后在微信小程序开发者工具中导入Taro的dist目录即可。
+4、推荐的框架风格：mobx(v4)用ES6语法、选择react框架的Hooks风格。
+
+Taro小程序的编程范式
+1、可以使用TaroUI组件库，但没有必要，因为TaroUI下载量不大，更何况做小程序也没有必要使用第三方组件库，建议使用Taro内置组件库。
+2、视图设计，尽可能使用Taro内置组件，不要使用HTML5标签。
+3、既然选择使用Hooks风格，你的组件都要用函数式组件。有哪些Hooks可以用呢？React Hooks，Taro Hooks都能使用。建议优先使用Taro Hooks。
+
+ReactNavtive：是Facebook官方开源的跨平台App开发技术，只能做Android App / IOS App。
+开发难点：建议搭建原生环境（），不建议搭建Expo沙盒环境。
+代码范式：React Hooks + 路由React Navigation + 状态管理Mobx + 样式Flex（单位px） + 内置组件。
+
+
+
+	

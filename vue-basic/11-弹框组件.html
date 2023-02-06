@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./assets/style.css">
+</head>
+<body>
+
+  <div id="app">
+
+    <button @click='show=true'>修改邮件</button>
+
+    <qf-modal
+      title='编辑'
+      show-close
+      :visable='show'
+      @close='show=false'
+      @ok='submit'
+    >
+      <!-- 在qf-modal子组件中，找到一个名字叫default的<slot>占位符，把当前结构放在那里！ -->
+      <template #default>
+        <div>
+          <div style='lineHeight:30px;'>请输入邮件</div>
+          <input style='lineHeight:30px;display:block;width:100%;' type="email" v-model='email' />
+        </div>
+      </template>
+    </qf-modal>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+
+  <script>
+    // 封装弹框组件
+    // 下面这堆选项，相当脚手架中的.vue文件
+    const msgBox = {
+      template: `
+      <div class='layer' v-show='visable'>
+        <div class='modal'>
+          <div class='header'>
+            <div class='title' v-text='title'></div>
+            <div class='close' v-show='showClose' @click='$emit("close")'>X</div>
+          </div>
+          <div class='body'>
+            <slot></slot>
+          </div>
+          <div class='footer'>
+            <span v-if='type=="danger"' class='danger' @click='$emit("ok")'>删除</span>
+            <span v-else class='primary' @click='$emit("ok")'>确定</span>
+            <span @click='$emit("close")'>取消</span>
+          </div>
+        </div>
+      </div>
+      `,
+      // 在接收父组件给的自定义属性时，如果是多个单词，在这里转化成“小驼峰命名法”。
+      // 比如：父组件给了一个 show-close 的属性，在这里接收建议使用 showClose。
+      props: {
+        title: { type: String, required: false, default: '标题' },
+        showClose: { type: Boolean, required: false, default: true },
+        type: { type: String, required: false, default:'primary' },
+        visable: { type: Boolean, required: false, default: false }
+      }
+    }
+  </script>
+
+  <script>
+    // 全局注册一个组件
+    // Vue.component('qf-modal', msgBox)
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        show: false,
+        email: ''
+      },
+      components: {
+        // 局部注册一个组件
+        'qf-modal': msgBox
+      },
+      methods: {
+        submit () {
+          console.log('业务，调接口', this.email)
+          this.show = false
+          this.email = ''
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>

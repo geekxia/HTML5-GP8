@@ -1,0 +1,66 @@
+{
+  "pages": [
+    "pages/article/article",
+    "pages/home/home",
+    "pages/share/share",
+    "pages/user/user",
+    "pages/find/find",
+    "pages/index/index",
+    "pages/good/good",
+    "pages/detail/detail"
+  ],
+  "subPackages": [
+    {
+      "root": "pageA",
+      "pages": [
+        "pages/music/music"
+      ]
+    },
+    {
+      "root": "pageB",
+      "pages": [
+        "pages/video/video"
+      ]
+    }
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarTextStyle": "black"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#000000",
+    "selectedColor": "#ff0000",
+    "backgroundColor": "white",
+    "borderStyle": "white",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/home.png",
+        "selectedIconPath": "assets/home-on.png"
+      },
+      {
+        "pagePath": "pages/find/find",
+        "text": "发现",
+        "iconPath": "assets/find.png",
+        "selectedIconPath": "assets/find-on.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "assets/user.png",
+        "selectedIconPath": "assets/user-on.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "为了提供更好的用户体验，请求使用你的位置信息"
+    }
+  }
+}

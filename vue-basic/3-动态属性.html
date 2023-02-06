@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .hello { color: red; }
+    .world { color: blue; }
+    .img { display: block; width: 100px; height: 100px; }
+    .box { width: 100px; height: 100px; border: 1px solid #ccc; }
+    .bg1 { background: red; }
+    .bg2 { background: blue; }
+    .bg3 { background: green; }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <!-- 像这种写死的属性，我们称之为“静态属性” -->
+    <h1 title='宁宇' class='hello'>你好</h1>
+    <hr>
+
+    <!-- 像这样带有 : 的属性，我们称之为“动态属性” -->
+    <!-- 注意，这个 : 是 v-bind的简写 -->
+    <h1 :title='who' :class='cc'>你好</h1>
+    <hr>
+
+    <img class='img' :src='girl' alt="qf" />
+    <hr>
+
+    <!-- 当同一个节点同时有静态class和动态class时，我们不建议这么写 -->
+    <!-- <div class='box' :class='back'></div> -->
+
+    <!-- <div :class='(`box ${back}`)'></div> -->
+    <!-- <div :class='("box "+back)'></div> -->
+    <!-- <div :class='["box", back]'></div> -->
+    <div :class='{box:true, [back]:toggle}'></div>
+    <hr>
+
+    <!-- <div style='width:100px;height:100px;border:1px solid #ccc;' :style='`background:${bg};`'></div> -->
+    <!-- <div :style='(`width:100px;height:100px;border:1px solid #ccc;background:${bg};`)'></div> -->
+    <!-- <div :style='[
+      {width:"100px", height:"100px"},
+      {border: "1px solid #ccc"},
+      {background: bg}
+    ]'>
+    </div> -->
+    <div :style='{
+      width:"100px",
+      height:"100px",
+      border:"1px solid #ccc",
+      background: bg
+    }'>
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        who: '熊小辉',
+        cc: 'hello',
+        girl: '',
+        back: '',
+        toggle: true,
+        bg: ''
+      }
+    })
+  </script>
+
+</body>
+</html>

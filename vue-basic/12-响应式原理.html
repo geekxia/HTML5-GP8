@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  输入：<input id='ipt' type="text" /><br>
+  结果：<h3 style='display:inline;' id='box'></h3>
+  <hr>
+  <h3 id='cnt'></h3>
+  <button id='btn'>自增</button>
+
+  <script>
+    // 在不使用Vue情况下，我们手动实现数据响应式（表单的双向绑定）
+    // 这是vue的data选项
+    const data = {
+      name: '',
+      count: 0
+    }
+    // 这是当前组件实例对象（new Vue({})）
+    const app = {}
+
+    Object.keys(data).forEach(k=>{
+      // 循环遍历劫持data，给每个属性添加getter/setter，并且将它们放在app上。
+      Object.defineProperty(app, k, {
+        get () {
+          console.log(`有人访问${k}这个变量`)
+          return data[k]
+        },
+        set (val) {
+          data[k] = val
+          console.log(`有人修改${k}这个变量`, val)
+          Watcher(k)
+        }
+      })
+    })
+
+    // 这是一个依赖收集（集合）
+    const dep = {
+      name: [],
+      count: []
+    }
+
+    function init() {
+      // 在初始化时，发生第一次“touch”，收集依赖
+      // v-text='name'
+      dep['name'].push(()=>{
+        document.getElementById('box').innerText = app.name
+      })
+      // v-model='name'
+      dep['name'].push(()=>{
+        document.getElementById('ipt').value = app.name
+      })
+      // 实现v-model绑定input事件的功能
+      // 想象v-model.lazy，就绑定blur事件
+      document.getElementById('ipt').addEventListener('blur', ev=>{
+        // set name
+        app.name = ev.target.value
+      })
+      // v-text='count'
+      dep['count'].push(()=>{
+        document.getElementById('cnt').innerText = app.count
+      })
+      // @click=
+      document.getElementById('btn').addEventListener('click', ()=>{
+        app.count++
+      })
+      // 依赖收集完成后，第一次Watcher所有的更新
+      Object.keys(dep).forEach(k=>Watcher(k))
+    }
+
+    function Watcher(k) {
+      dep[k].forEach(domFn=>domFn())
+    }
+
+    init() // 调用初始化方法
+
+  </script>
+
+  <script>
+    var obj2 = {}
+    var a = 1
+    var b = 2
+    // 在obj2上添加一个属性叫a，并且同时给添加getter/setter(劫持)
+    // 当属性被劫持了，我们就有了机会去追踪变量的变化。
+    Object.defineProperty(obj2, 'a', {
+      // 表示有人访问 a时，触发get执行
+      get () {
+        console.log('---a get')
+        return a
+      },
+      // 表示有人修改 a时，触发set执行
+      set (val) {
+        console.log('---a set')
+        a = val
+      }
+    })
+    Object.defineProperty(obj2, 'b', {
+      get () { return b },
+      set (val) { b = val }
+    })
+  </script>
+
+  <script>
+    // 这是普通对象，你访问它或修改它，我们都无敌追踪。
+    // 这种对象不具有响应式。
+    var obj1 = {
+      a: 1,
+      b: 2
+    }
+  </script>
+
+</body>
+</html>

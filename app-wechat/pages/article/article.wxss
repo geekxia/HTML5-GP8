@@ -1,0 +1,5 @@
+/* pages/article/article.wxss */
+.row {
+  line-height: 100rpx;
+  text-align: center;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .page span {
+      display: inline-block;
+      padding: 10px 15px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+    }
+    .page span.on {
+      color: white;
+      background: orange;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+
+    摄氏温度：
+    <input type="text" v-model.number='count' />
+    <br>
+    华氏温度：
+    <!-- <h3 v-text='fa'></h3> -->
+    <input type="text" v-model.number.lazy='fa'/>
+    <hr>
+
+    <div class='page'>
+      <span @click='page=(page>1?page-1:1)'><<</span>
+      <!-- 左边的三点，当页码大于3时出现 -->
+      <span v-if='(page>3)'>...</span>
+      <span
+        v-for='p in pageArr'
+        v-text='p'
+        @click='page=p'
+        :class='(page==p?"on":"")'>
+      </span>
+      <span>...</span>
+      <span @click='page=page+1'>>></span>
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        count: 0,
+        page: 1
+      },
+      // 是一个对象结构
+      computed: {
+        // 计算属性，默认只有GET功能
+        // fa () {
+        //   return (this.count * 1.8 + 32).toFixed(2)
+        // },
+
+        // 计算属性，还可以拆成GET、SET的写法
+        // 所以计算属性，可以绑定在v-model，还可以直接修改计算属性
+        fa: {
+          get () {
+            return (this.count * 1.8 + 32).toFixed(2)
+          },
+          set (val) {
+            console.log('---val', val)
+            this.count = ((val - 32) / 1.8).toFixed(0)
+          }
+        },
+        pageArr () {
+          // page=1  [1,2,3,4,5]
+          // page=2  [1,2,3,4,5]
+          // page=3  [1,2,3,4,5]
+          // page>3  [page-2,page-1,page,page+1,page+2]
+          const p = this.page
+          return p>3 ? [p-2,p-1,p,p+1,p+2] : [1,2,3,4,5]
+        }
+      },
+      methods: {}
+
+    })
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .chat {
+      display: flex;
+    }
+    .chat > div {
+      flex: 1;
+      border: 1px solid #ccc;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <div ref='box'>测试[ref]访问并操作DOM</div>
+    <hr>
+
+    <qf-child-a ref='a'></qf-child-a>
+    <button @click='click1'>测试[ref]访问并操作Vue组件</button>
+    <hr>
+
+    <qf-child-a></qf-child-a>
+    <button @click='click2'>通常[$parent/$children]来访问任意组件实例</button>
+    <hr>
+
+    <qf-child-b
+      x='1'
+      :y='[1,2,3]'
+      :z='true'
+      class='bb'
+      @abc='console.log("呵呵")'
+    >
+    </qf-child-b>
+    <hr>
+
+    <div class='chat'>
+      <qf-child-c></qf-child-c>
+      <qf-child-d></qf-child-d>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+
+  <script>
+    // 创建一个事件总线
+    const bus = new Vue() // 电脑主板 南桥 -bus(总线)- 北桥
+    // bus.$on / bus.$emit / bus.$off
+  </script>
+
+  <script>
+    Vue.component('qf-child-a', {
+      template: `<div>我是child-a组件: {{name}}</div>`,
+      data () { return { name: 'A' } },
+      methods: {
+        change (arg) { this.name = arg }
+      }
+    })
+
+    Vue.component('qf-child-b', {
+      template: `<div>我是child-b组件</div>`,
+      // 从组件树中取出一个名字叫num的数据
+      // 这个inject数据，可以使用this访问
+      inject: ['num'],
+      mounted () {
+        console.log('--$attrs', this.$attrs)
+        console.log('--$listeners', this.$listeners)
+        console.log('--num', this.num)
+      }
+    })
+  </script>
+
+  <script>
+    Vue.component('qf-child-c', {
+      template: `
+      <div>
+        <h3>小C</h3>
+        <input type="text" v-model.trim='msg' />
+        <button @click='send'>发送</button>
+        <div v-html='content'></div>
+      </div>
+      `,
+      data () {
+        return {
+          msg: '',
+          content: ''
+        }
+      },
+      mounted () {
+        bus.$on('cc', msg=>{
+          this.content += `<div>小D说：${msg}</div>`
+        })
+      },
+      methods: {
+        send () {
+          // 向 dd 这个频道上发消息
+          bus.$emit('dd', this.msg)
+          this.msg = ''
+        }
+      }
+    })
+
+    Vue.component('qf-child-d', {
+      template: `
+      <div>
+        <h3>小D</h3>
+        <input type="text" v-model.trim='msg' />
+        <button @click='send'>发送</button>
+        <div v-html='content'></div>
+      </div>
+      `,
+      data () {
+        return {
+          msg: '',
+          content: ''
+        }
+      },
+      mounted () {
+        // 订阅 dd 这个频道，当消息来的时候，回调函数会执行
+        bus.$on('dd', msg => {
+          console.log('dd频道上有消息了', msg)
+          this.content += `<div>小C说：${msg}</div>`
+        })
+      },
+      methods: {
+        send () {
+          bus.$emit('cc', this.msg)
+          this.msg = ''
+        }
+      }
+    })
+  </script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        count: 300
+      },
+      mounted () {
+        console.log('refs', this.$refs)
+        // 相当于是快速的DOM访问
+        this.$refs.box.style.color = 'red'
+      },
+      // 注入数据
+      // provide: { num: 100 },
+      provide () {
+        // do something
+        return {
+          num: this.count
+        }
+      },
+      methods: {
+        click1 () {
+          console.log('child-a name', this.$refs.a.name)
+          this.$refs.a.change('AA')
+        },
+        click2 () {
+          console.log('--', this.$parent)
+          console.log('--', this.$children)
+          // 访问当前组件的第一个孩子
+          const c1 = this.$children[0]
+          console.log('c1 name', c1.name)
+          c1.change('CA')
+          console.log('--', c1.$parent)
+          console.log('--', c1.$children)
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>

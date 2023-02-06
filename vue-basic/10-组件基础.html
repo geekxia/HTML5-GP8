@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .score span {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin: 0 5px;
+      cursor: pointer;
+      /* border: 1px solid #ccc; */
+      background: url('./assets/score.png') center center / 14px 14px ;
+    }
+    .score span.on {
+      background: url('./assets/score-on.png') center center / 14px 14px ;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- 这个value就是自定义属性，这个input就是自定义事件 -->
+    <!-- 在组件上，带有@的就是自定义事件，不带@的就是自定义属性 -->
+
+    <!-- <qf-score :value='service' @input='service=$event'></qf-score> -->
+    <!-- <qf-score v-model='service'></qf-score> -->
+
+    <!-- <input type="text" v-model='name' />
+    <input type="text" :value='name' @input='name=$event.target.value'> -->
+
+    <qf-score v-model='service'>
+      <template #right>
+        <a v-text='(`${service}分`)'></a>
+      </template>
+      <template #left>
+        <a>服务态度：</a>
+      </template>
+    </qf-score>
+
+    <qf-score v-model='delivery'>
+      <template #left>
+        <a>配送速度：</a>
+      </template>
+      <template #right>
+        <a v-text='(`${delivery}分`)'></a>
+      </template>
+    </qf-score>
+
+    <qf-score v-model='quality'>
+      <template #left>
+        <a>产品质量：</a>
+      </template>
+      <template #right>
+        <a v-text='(`${quality}分`)'></a>
+      </template>
+    </qf-score>
+    <br>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+
+  <script>
+    // 约定：在MVVM开发中，我们通常谈论的“组件”，指的是自定义封装的组件，或者第三方组件库提供的组件，而不是HTML标签。
+    // 习惯：在MVVM开发的Web应用，是由组件堆砌而成，既然是堆砌，那就一定有嵌套关系（父子关系），所以我们通常会谈论到父组件、子组件、后代组件等概念。
+
+    // 封装咱们第一个可复用的评分组件
+    Vue.component('qf-score', {
+      template: `
+        <div class='score'>
+          <slot name='left'></slot>
+          <span
+            v-for='i in 5'
+            :class='{"on": value >= i}'
+            @click='$emit("input", i)'
+          >
+          </span>
+          <slot name='right'></slot>
+        </div>
+      `,
+      // 使用props接收父组件传递过来的数据
+      // 在当前组件中，props数据可以使用this访问
+      props: {
+        value: { type: Number, required: false }
+      },
+      methods: {
+        change (i) {
+          // console.log('--clicked', i)
+          // 触发自定义事件，同时回传数据给父组件
+          // this.$emit('input', i)
+        }
+      }
+    })
+  </script>
+
+  <script>
+    // 在这里，这个new Vue()理解是Vue根组件。
+    const app = new Vue({
+      el: '#app',
+      data: {
+        service: 0,
+        delivery: 0,
+        quality: 0
+      }
+    })
+  </script>
+
+</body>
+</html>

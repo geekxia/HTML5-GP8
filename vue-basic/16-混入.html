@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <h1 v-text='count + num'></h1>
+    <hr>
+    <qf-button></qf-button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+
+  <script>
+    // 全局混入（混入的是vue组件选项）
+    // 除了在根组件中data可以是普通对象外，在混入或自定义组件中data必须是工厂函数。
+    Vue.mixin({
+      data () {
+        return {
+          num: 1,
+          name: '全局混入'
+        }
+      },
+      created () { console.log('---created') },
+      methods: {
+        maindian () {
+          console.log('--调接口，添加埋点')
+        }
+      }
+    })
+
+    const opt1 = {
+      mounted () { console.log('--mounted') },
+      methods: {
+        init () { console.log('--init') }
+      }
+    }
+
+    const opt2 = {
+      updated () { console.log('--updated') },
+      data () {
+        return {
+          name: '局部混入'
+        }
+      }
+    }
+  </script>
+
+  <script type='text/x-template' id='btn'>
+    <div>
+      <h3 v-text='name'></h3>
+      <h3 v-text='num'></h3>
+      <button @click='maindian'>点击[埋点]方法</button>
+    </div>
+  </script>
+
+  <script>
+    Vue.component('qf-button', {
+      template: '#btn',
+      // 用工厂函数返回一份完全独立的data，避免组件复用时彼此相互影响。
+      data () {
+        return {
+          name: '系统管理员'
+        }
+      },
+      // 局部混入
+      mixins: [opt1, opt2]
+    })
+  </script>
+
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        count: 1
+      }
+    })
+  </script>
+
+  <script>
+    // 用代码解释data是工厂函数的好处
+    function factory() {
+      return {
+        a: 1,
+        b: 2
+      }
+    }
+    const obj1 = factory()
+    const obj2 = factory()
+  </script>
+
+</body>
+</html>

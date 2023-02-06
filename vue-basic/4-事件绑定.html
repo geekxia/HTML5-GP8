@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .outer { border:1px solid red; height: 100px; }
+    .outer>div { background:blue; height: 50px; }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <h1 v-text='count'></h1>
+    <button @click='add'>点击</button>
+    <hr>
+    <div @click='rowClick(1, $event)'>第一行</div>
+    <div @click='rowClick(2, $event)'>第二行</div>
+    <div @click='rowClick(3, $event)'>第三行</div>
+    <hr>
+
+    <div class='outer' @click='outerClick'>
+      <div @click.stop='innerClick'></div>
+    </div>
+
+    <input type="checkbox" @click.prevent='checkClick' />点击
+    <br>
+    <a href="https://baidu.com" @click.prevent.stop='hrefClick'>点击</a>
+    <br>
+
+    搜索：<input type="text" @keyup.enter='search' />
+    <br>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        count: 100
+      },
+      // 专用用于自定义方法、封装事件处理器
+      methods: {
+        add (ev) {
+          console.log('事件对象', ev)
+          this.count += 5
+        },
+        rowClick (idx, ev) {
+          console.log('---', idx)
+          console.log('事件对象', ev)
+        },
+        outerClick () {
+          console.log('---outer')
+        },
+        innerClick () {
+          console.log('---inner')
+        },
+        checkClick () {
+          console.log('--checkbox clicked')
+        },
+        hrefClick () {
+          console.log('--href clicked')
+        },
+        search (ev) {
+          console.log('开始搜索', ev.target.value)
+          console.log('键盘码', ev.keyCode)
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>

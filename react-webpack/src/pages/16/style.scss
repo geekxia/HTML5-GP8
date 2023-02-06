@@ -1,0 +1,31 @@
+.cnode {
+  .author {
+    text-align: center;
+    img {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+    }
+  }
+  .pages {
+    text-align: right;
+    span {
+      display: inline-block;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    span.on {
+      color: red;
+    }
+  }
+  .tabs {
+    span {
+      display: inline-block;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    span.on {
+      color: red;
+    }
+  }
+}

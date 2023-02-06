@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    [v-cloak] { display: none; }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <h1>演示过滤器的用法</h1>
+    <h1 :title='price|rmb'>牛肉价格：<span v-cloak>{{ price|rmb }}</span></h1>
+    <h1 :title='num|stu'>你的学号：<span v-cloak>{{ num|stu }}</span></h1>
+    <hr>
+
+    <h1>演示自定义指令的用法</h1>
+    <h1 v-color='"#ff0000"'>李虎</h1>
+    <h1 v-color='cc'>宁宇</h1>
+    用户名：
+    <input type="text" v-form.lazy.number.trim='name' />
+
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+  <script>
+    // 全局过滤器（一次封装，在所有组件中都可以使用）
+    Vue.filter('rmb', (val)=>{
+      // do something
+      return `￥${val.toFixed(2)}`
+    })
+
+    function student(val) {
+      // do something
+      return `SZ-${val}`
+    }
+  </script>
+
+  <script>
+    // 自定义指令（全局）
+
+    // 当第二参数是Fn时，它等价于自定义指令中的bind/update这两钩子
+    // Vue.directive('color', function(el, binding){
+    //   console.log('--el', el)
+    //   console.log('--binding', binding)
+    //   el.style.color = binding.value
+    // })
+
+    // 当第二个参数是钩子选项时，可以更加精细地编写指令背后的DOM逻辑
+    Vue.directive('color', {
+      // 当指令和DOM第一次绑定（接触）时触发
+      bind (el, binding) {
+        el.style.color = binding.value
+      },
+      // 当指令所对应的表达式更新时触发
+      update (el, binding) {
+        el.style.color = binding.value
+      }
+    })
+  </script>
+
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        price: 59.8888,
+        num: 211700001,
+        cc: 'red',
+        name: ''
+      },
+      // 局部过滤器（只能在当前组件中使用）
+      filters: {
+        stu: student
+      },
+      // 局部指令（只能在当前组件中使用）
+      directives: {
+        'form': {
+          bind: (el, binding, vnode) => {
+            console.log('--el', el)
+            console.log('--binding', binding)
+            console.log('--vnode', vnode)
+
+            const { value, expression } = binding
+            // 这个上下文，在模板中指令就是从上下文中取数据的
+            const { context } = vnode
+            // 使用修饰符
+            const { lazy, number, trim } = binding.modifiers
+
+            // 相当于v-bind:value的功能
+            el.value = value
+            // 相当于v-on:input的功能
+            el.addEventListener((lazy?'blur':'input'), ev=>{
+              let val = ev.target.value
+              // 考虑到.number和.trim，要先trim后Number
+              if (trim) val = val.trim()
+              if (number) val = Number(val)
+              context[expression] = val
+            })
+          },
+          // 当表达式更新时触发
+          update: (el, binding, vnode) => {
+            el.value = binding.value
+          }
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>

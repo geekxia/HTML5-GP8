@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+    <h1 v-text='count'></h1>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        count: 1
+      },
+      // 初始化声明methods方法、生命周期钩子函数
+      beforeCreate () {
+        console.log('--- beforeCreate')
+      },
+      // 把data选项上的属性放到this上
+      // 遍历data选项，给每个属性添加getter/setter(劫持)
+      created () {
+        console.log('--- created')
+        // 有些公司，在这里调接口。
+      },
+      // 找el、找template，得到有效的视图结构
+      // 把template选项编译成render函数（为了生成虚拟DOM作准备）
+      beforeMount () {
+        console.log('--- beforeMount')
+      },
+      // 调用render方法第一次生成虚拟DOM (virtual dom = vm)
+      // 什么是虚拟DOM？本质上就是一个JSON数据，用于描述DOM视图结构，保存内存中。
+      // 为什么要用虚拟DOM的存在呢？有了虚拟DOM，就可以避免我们直接操作DOM，降低人为的DOM滥用，目的是为了提升Web性能。
+      // 根据虚拟DOM结构，第一次初始化视图结构（生成真实的DOM），在这里会产生第一次“touch”，touch的结果是依赖收集。
+      // 生成真实DOM，是一个循环递归的过程，从外层向内（从根组件向后代组件递归）
+      mounted () {
+        console.log('--- mounted')
+        // 调接口，DOM操作、ref操作、开定时器。。。
+      },
+      // 网页初始化已完成。
+      // 条件：当有人修改set声明式变量时
+      beforeUpdate () {
+        console.log('--- beforeUpdate')
+      },
+      // 根据新的data，render生成新的虚拟DOM，此时在电脑内存中就有了两个虚拟DOM。
+      // patch(newVnode、oldVnode) => diff，使用diff运算找出新旧虚拟DOM之间的最小差异，通知Watcher来更新它们，视图再次更新完成。
+      updated () {
+        console.log('--- updated')
+      },
+      // 条件：当路由切换或调用this.$destroy()时
+      beforeDestroy () {
+        console.log('--- beforeDestroy')
+        // 清除缓存、关闭定时器。。。
+      },
+      // 拆卸掉当前组件对应的Watcher、解绑当前组件中事件处理器；
+      // 递归拆卸掉（强制销毁）所有的子组件。
+      destroyed () {
+        console.log('--- destroyed')
+      }
+    })
+  </script>
+
+</body>
+</html>

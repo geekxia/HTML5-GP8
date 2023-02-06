@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .tabbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      line-height: 50px;
+      display: flex;
+    }
+    .tabbar span {
+      flex: 1;
+      text-align: center;
+      border: 1px solid #eee;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .tabbar span.on {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <div id='app'>
+
+    <qf-tab v-model='page' :list='list' fixed></qf-tab>
+
+    <!-- <qf-async></qf-async> -->
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+
+  <script>
+    // 异步组件：这里的第二个参数是一个Promise函数
+    // 后续在脚手架中，使用动态导入语法 ()=>import('') 加载组件（就是异步组件）
+    const qfAsync = (resole, reject)=>{
+      setTimeout(()=>{
+        resole({
+          template: '<div>我是异步的组件</div>'
+        })
+      }, 2000)
+    }
+    // 注册异步组件
+    Vue.component('qf-async', qfAsync)
+  </script>
+
+  <script>
+    // 动态组件：<keep-alive>、<component>
+    Vue.component('qf-home', {
+      template: `
+      <div>
+        <h3>首页页面</h3>
+        <input type="text" />
+      </div>
+      `,
+      created () { console.log('qf-home created') },
+      activated () { console.log('qf-home 激活') },
+      deactivated () { console.log('qf-home 休眠') },
+      destroyed () {console.log('qf-home destroyed')},
+    })
+
+    Vue.component('qf-cate', {
+      template: `
+      <div>
+        <h3>品类页面</h3>
+        <input type="text" />
+      </div>
+      `,
+      destroyed () {console.log('qf-cate destroyed')}
+    })
+
+    Vue.component('qf-find', {
+      template: '<h3>搜索页面</h3>'
+    })
+
+    Vue.component('qf-user', {
+      template: `
+      <div>
+        <h3>个人中心</h3>
+        <input type="text" />
+      </div>
+      `,
+      destroyed () {console.log('qf-user destroyed')}
+    })
+  </script>
+
+  <script>
+    // 演示Tab选项卡的封装
+    Vue.component('qf-tab', {
+      template: `
+      <div>
+        <div
+          class='tabbar'
+          @click='toggle'
+          :style='{ position: fixed ? "fixed" : "static" }'
+        >
+          <span
+            v-for='item in list'
+            :data-page='item.page'
+            v-text='item.text'
+            :class='{"on":value==item.page}'
+          >
+          </span>
+        </div>
+
+        <keep-alive>
+          <component :is='value'></component>
+        </keep-alive>
+      </div>
+      `,
+      props: {
+        value: { type: String, required: true },
+        list: { type: Array, required: true },
+        fixed: { type: Boolean, required: false, default: false }
+      },
+      methods: {
+        toggle (ev) {
+          console.log('ev', ev.target.dataset.page)
+          // this.page = ev.target.dataset.page
+          this.$emit('input', ev.target.dataset.page)
+        }
+      }
+    })
+  </script>
+
+  <script>
+
+    const app = new Vue({
+      el: '#app',
+      data: {
+        page: 'qf-home',
+        list: [
+          { id: 1, page: 'qf-home', text: '首页' },
+          { id: 2, page: 'qf-cate', text: '品类' },
+          { id: 3, page: 'qf-find', text: '发现' },
+          { id: 4, page: 'qf-user', text: '我的' }
+        ]
+      },
+    })
+  </script>
+
+</body>
+</html>

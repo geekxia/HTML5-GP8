@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    <div v-for='item in list'>
+      <span v-text='item.id'></span> -
+      <span v-text='item.name'></span> -
+      <span v-text='item.age'></span>
+    </div>
+    <button @click='change'>修改用户列表</button>
+    <hr>
+
+    <div v-html='content'></div>
+    <button @click='gift'>打开盲盒</button>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        list: [
+          { id: 1, name: '王祖文', age: 10 },
+          { id: 2, name: '王昊阳', age: 80 },
+          { id: 3, name: '周立凯', age: 50 }
+        ],
+        content: '未知'
+      },
+      methods: {
+        change () {
+          this.list[2].age = 55
+          // 场景：明明修改声明式变量已成功，但视图未更新
+          this.$forceUpdate()
+          // 替代方案，深拷贝重新赋值
+          // this.list = JSON.parse(JSON.stringify(this.list))
+        },
+        gift () {
+          // 声明式变量被修改，这会触发更新流程（生命周期的第三阶段）
+          // 更新阶段是异步的
+          this.content = `
+            <div>
+              <a id="gift" href="http://baidu.com" target="_blank">百度</a>
+            </div>
+          `
+          // 在下一次Tick完成时执行回调函数
+          this.$nextTick(()=>{
+            document.getElementById('gift').style.color = 'red'
+          })
+          // 替代方案，使用 updated() 来实现上述相同功能，但不推荐使用。
+        }
+      },
+      // updated () {
+      //   const dom = document.getElementById('gift')
+      //   if (dom) dom.style.color = 'red'
+      // }
+    })
+  </script>
+
+</body>
+</html>

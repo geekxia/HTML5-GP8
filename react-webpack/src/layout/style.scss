@@ -1,0 +1,27 @@
+.layout {
+  .navbar {
+    height: 60px;
+    background: #ccc;
+    &>span {
+      display: inline-block;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    &>span.on {
+      color: red;
+    }
+  }
+  .navbar2 {
+    &>span {
+      display: inline-block;
+      padding: 10px 20px;
+      cursor: pointer;
+      a {
+        text-decoration: none;
+      }
+      .on {
+        color: red;
+      }
+    }
+  }
+}

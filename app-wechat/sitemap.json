@@ -1,0 +1,7 @@
+{
+    "desc": "千锋",
+    "rules": [{
+      "action": "allow",
+      "page": "*"
+    }]
+}

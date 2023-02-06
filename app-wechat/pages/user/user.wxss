@@ -1,0 +1,2 @@
+/* pages/user/user.wxss */
+.canvas { width: 750rpx; height: 400rpx; background: #eeeeee; }

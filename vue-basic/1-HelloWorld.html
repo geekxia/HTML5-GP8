@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body { margin: 0; padding: 0; }
+  </style>
+</head>
+<body>
+
+  <div id='app'>
+    <!-- 这内部，就是vue的“地盘” -->
+    <h1 v-text='msg'></h1>
+    <h1 v-text='count'></h1>
+    <button v-on:click='add'>自增</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+  <script>
+    // console.log('Vue', Vue)
+    // 创建一个vue响应式系统
+    const app = new Vue({
+      // 把vue响应式系统挂载在#app这个DOM节点上
+      // app.$mount()
+
+      // el: '#app',
+      // 专门用于定义声明式变量的。
+      // 这些声明式变量的特点：可以通过指令将其绑定在视图上，当声明式变量发生变化时，视图自动更新。这也就所谓的响应式。
+      // 想象：这些数据是来自Server端的。
+      data: {
+        count: 1,
+        msg: 'Hello World'
+      },
+      // 专用用于定义各种方法或事件处理器
+      methods: {
+        add () {
+          console.log('自增', this)
+          this.count++
+        }
+      }
+    })
+
+    app.$mount('#app')
+  </script>
+
+</body>
+</html>

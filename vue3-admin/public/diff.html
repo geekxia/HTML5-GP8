@@ -1,0 +1,48 @@
+<script>
+  // vue(v2)
+
+  <div>
+    <h1>你好</h1>
+    <h1 v-text='msg' @click='handler' :title='title'></h1>
+  </div>
+
+  // 生成一个VM
+  const vm1 = {
+    tag: 'div',
+    children: [
+      {
+        tag: 'h1',
+        patchFlag: 0,
+        children: [
+          tag: 'text',
+          text: '你好'
+        ]
+      },
+      {
+        tag: 'h1',
+        props: {
+          click: ctx.handler,
+          title: ctx.title
+        },
+        children: [
+          {
+            tag: 'text',
+            text: ctx.msg
+          }
+        ]
+      }
+    ]
+  }
+
+  // 当msg=''变化了，再调用render()
+
+  const vm2 = {
+    tag: {}
+  }
+
+  // const dirty = patch(vm1, vm2)
+
+  1、虚拟DOM生成变化（静态提升、事件缓存、patchFlag）
+  2、diff运算（根据patchFlag选择性地进行对比）
+
+</script>

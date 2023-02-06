@@ -1,0 +1,14 @@
+.qftab {
+  display: flex;
+  /* width: 100%; */
+  /* border: 1rpx solid #cccccc; */
+}
+.qftab>view {
+  flex: 1;
+  border: 1rpx solid #cccccc;
+  text-align: center;
+  padding:  10rpx 0;
+}
+.qftab>view.on {
+  color: red;
+}

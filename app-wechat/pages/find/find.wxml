@@ -1,0 +1,41 @@
+<view>
+  <qftab lang='{{lang}}' bindchange='langChange'>
+    <view>切换语言</view>
+  </qftab>
+  
+  <view>{{count}}</view>
+  <button bindtap='addCount'>自增</button>
+
+  <view wx:for="{{list}}" wx:key="*this" wx:for-item="row">
+    <text>{{row.id}}</text>
+    --
+    <text>{{row.name}}</text>
+    --
+    <text>{{row.age}}</text>
+  </view>
+
+  <view wx:if="{{idx===1}}">第一行</view>
+  <view wx:elif="{{idx===2}}">第二行</view>
+  <view wx:elif="{{idx===3}}">第三行</view>
+  <view wx:else>第四行</view>
+
+  <view hidden="{{bol}}">千锋</view>
+
+  <label>用户名：</label>
+  <input type="text" value="{{username}}" bindinput='getUsername' />
+  <label>密码：</label>
+  <input type="text" model:value="{{password}}"/>
+  <button bindtap='submit'>提交</button>
+
+  <button data-xxx='100' bindtap='handle'>测试事件</button>
+
+  <view id='box'></view>
+  <button bindtap='start1'>开始表演</button>
+
+  <view id='door'></view>
+  <button bindtap='start2'>开始表演</button>
+
+  
+
+
+</view>

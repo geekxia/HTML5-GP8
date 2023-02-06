@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <style>
+    [v-cloak] { display: none; }
+  </style>
+</head>
+<body>
+
+  <div id="root">
+    <!-- <h1 v-text='name'></h1> -->
+    <!-- <h1 v-text='age'></h1> -->
+    <hr>
+    <!-- <h1 v-cloak>{{ name }}</h1> -->
+    <hr>
+    <!-- <h1 v-cloak v-once>{{ age }}</h1> -->
+    <hr>
+    <div v-pre>
+      <div v-text='content'></div>
+      <div v-html='content'></div>
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#root',
+      data: {
+        name: '张三',
+        age: 30,
+        content: '<a href="https://baicu.com" target="_blank">百度</a>'
+      },
+
+    })
+  </script>
+
+</body>
+</html>

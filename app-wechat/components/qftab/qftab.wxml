@@ -1,0 +1,6 @@
+<view class="qftab">
+  <slot></slot>
+  <block wx:for="{{list}}" wx:key='*this'>
+    <view data-value='{{item.value}}' class="{{lang===item.value?'on':''}}" bindtap="change">{{item.tab}}</view>
+  </block>
+</view>

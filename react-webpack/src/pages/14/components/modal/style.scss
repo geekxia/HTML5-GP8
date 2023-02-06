@@ -1,0 +1,81 @@
+.layer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,.3);
+  transition: all ease 1s;
+
+  .wrap {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    width: 520px;
+    margin-left: -260px;
+    background-color: white;
+    border-radius: 3px;
+    box-sizing: border-box;
+
+    .header {
+      line-height: 60px;
+      font-size: 14px;
+      border-bottom: 1px solid #eee;
+      overflow: hidden;
+      height: 60px;
+      padding: 0 20px;
+
+      .title {
+        float: left;
+      }
+
+      .close {
+        float: right;
+        cursor: pointer;
+      }
+    }
+
+    .body {
+      box-sizing: border-box;
+      padding: 20px;
+      font-size: 14px;
+    }
+
+    .footer {
+      border-top: 1px solid #eee;
+      box-sizing: border-box;
+      height: 60px;
+      padding: 0 20px;
+      overflow: hidden;
+      &>.button {
+        float: right;
+        margin-left: 20px;
+        margin-top: 15px;
+      }
+    }
+  }
+
+  .button {
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 15px;
+    border-radius: 3px;
+    font-size: 12px;
+    border: 1px solid transparent;
+  }
+  .button.cancel {
+    border-color: #eee;
+  }
+  .button.primary {
+    border-color: blue;
+    background: blue;
+    color: white;
+  }
+  .button.danger {
+    border-color: red;
+    background: red;
+    color: white;
+  }
+}

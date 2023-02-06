@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id="app">
+
+    <!-- v-for渲染数组 -->
+    <div v-for='(user,index) in list' :key='user.id'>
+      <span v-text='index'></span>
+      --
+      <span v-text='user.name'></span>
+      --
+      <span v-text='user.age'></span>
+    </div>
+    <hr>
+
+    <!-- v-for渲染JSON对象 -->
+    <div v-for='(v, k, index) in info'>
+      <span v-text='index'></span>
+      --
+      <span v-text='k'></span>
+      :
+      <span v-text='v'></span>
+    </div>
+    <hr>
+
+    <!-- v-for还可渲染Number整数 -->
+    <div v-for='(n, index) in row'>
+      <span v-text='index'></span>
+      --
+      <span v-text='n'></span>
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        list: [
+          { id: 1, name: '罗诚', age: 10 },
+          { id: 2, name: '郭晴', age: 20 },
+          { id: 3, name: '海霞', age: 30 }
+        ],
+        info: {
+          compony: '千锋教育',
+          tel: '0755-68788888',
+          address: '深圳宝安西部硅谷'
+        },
+        row: 5
+      }
+    })
+  </script>
+
+</body>
+</html>
